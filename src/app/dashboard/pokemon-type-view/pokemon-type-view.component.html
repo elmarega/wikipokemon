@@ -1,7 +1,7 @@
 <h2>Tipos de pokemons</h2>
 
 <section class="card__container">
-  @for(item of types; track item.url) {
+  @for(item of types | async;track item.url) {
     <card>
       <strong title>{{item.name}}</strong>
 

@@ -8,21 +8,16 @@ import { Router } from '@angular/router';
   templateUrl: './pokemon-type-view.component.html',
   styleUrl: './pokemon-type-view.component.scss',
 })
-export class PokemonTypeViewComponent implements OnInit {
+export class PokemonTypeViewComponent {
+  service = inject(PokemonApiHttpService);
+  router = inject(Router);
+
   isLoading = true;
-  types!: IPokemonType[];
 
-  constructor(
-    private pokemonApiHttpService: PokemonApiHttpService,
-    private router: Router
-    ) {}
-
-  ngOnInit(): void {
-    this.pokemonApiHttpService.getTypes().pipe(
-      map(({ results }) => this.types = results),
-      tap(() => (this.isLoading = false))
-    );
-  }
+  types = this.service.getTypes().pipe(
+    map(({ results }) => results),
+    tap(() => (this.isLoading = false))
+  );
 
   viewrDetails({ url, name }: IPokemonType) {
     const typeId = url.match(/\/([^\/]+)\/?$/);
