@@ -60,6 +60,6 @@ describe('PokemonApiHttpService', () => {
 
     const req = httpMock.expectOne('https://pokeapi.co/api/v2/pokemon/1');
     expect(req.request.method).toBe('GET');
-    req.flush({ pokemon: dummyPokemon });
+    req.flush(dummyPokemon);
   });
 });

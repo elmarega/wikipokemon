@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PokemonApiHttpService } from '../../shared/services/pokemon-api-http.service';
 import { PokemonViewComponent } from './pokemon-view.component';
 import { of } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PokemonViewComponent', () => {
   let component: PokemonViewComponent;
@@ -30,7 +31,8 @@ describe('PokemonViewComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
         { provide: PokemonApiHttpService, useValue: mockPokemonApiHttpService }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PokemonViewComponent);

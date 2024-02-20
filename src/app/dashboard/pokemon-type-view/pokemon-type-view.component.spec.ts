@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
 import { PokemonApiHttpService } from '../../shared/services/pokemon-api-http.service';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PokemonTypeViewComponent', () => {
   let component: PokemonTypeViewComponent;
@@ -21,7 +22,8 @@ describe('PokemonTypeViewComponent', () => {
       providers: [
         { provide: PokemonApiHttpService, useValue: mockService },
         { provide: Router, useValue: mockRouter }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
@@ -36,10 +38,14 @@ describe('PokemonTypeViewComponent', () => {
   });
 
   it('should call getTypes on service and set types', () => {
-    const dummyTypes = [{ name: 'type1', url: 'url1' }, { name: 'type2', url: 'url2' }];
-    mockService.getTypes.and.returnValue(of({ results: dummyTypes }));
+    const mock: IPokemonTypeResult = {
+      results: [{
+        name: 'type1',
+        url: 'url1'
+      }]
+    };
 
-    component.ngOnInit();
+    const dummyTypes = mockService.getTypes.and.returnValue(of(mock));
 
     expect(mockService.getTypes).toHaveBeenCalled();
     expect(component.types).toEqual(dummyTypes);
@@ -54,7 +60,6 @@ describe('PokemonTypeViewComponent', () => {
     mockService.getTypes.and.returnValue(of({ results: [dummyType] }));
     mockRouter.navigate.and.callThrough();
 
-    component.ngOnInit();
     component.viewrDetails(dummyEvent);
 
     expect(mockRouter.navigate).toHaveBeenCalledWith(['dashboard', 'pokemon-view', dummyType.name], { queryParams: { typeId: dummyTypeId } });
