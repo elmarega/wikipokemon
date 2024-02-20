@@ -1,0 +1,13 @@
+<div class="wrapper__page">
+  <button [disabled]="pageIndex == 1" (click)="setPage(pageIndex - 1)">
+    Anterior
+  </button>
+  <input type="number" class="btn-secondary btn-selected" [(ngModel)]="pageIndex" (ngModelChange)="setPage($event)" min="1" [max]="totalPage" />
+  / {{totalPage}}
+  <button
+    [disabled]="totalPage <= pageIndex "
+    (click)="setPage(pageIndex + 1)"
+  >
+    Proximo
+  </button>
+</div>

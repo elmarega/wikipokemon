@@ -1,0 +1,27 @@
+<h2>Pokemons {{ "" }}</h2>
+
+<div class="flex-end p-1">
+  <pagination
+    (pageIndexChange)="setPage($event)"
+    [totalPage]="totalPage"
+    [numberOfPage]="numberOfPage"
+  ></pagination>
+</div>
+<section class="card__container">
+  @for(item of pokemonsPaged;track item.url) {
+  <card>
+    <strong title class="flex-centered">{{ item.name }}</strong>
+
+    <div content class="flex-centered">
+      @if(item.url) {
+
+      <img [ngSrc]="item.url" width="96" height="96" [alt]="item.name" />
+      } @else {
+      {{ "img" }}
+      }
+    </div>
+  </card>
+  } @if(isLoading) {
+  <p> Carregando </p>
+  }
+</section>

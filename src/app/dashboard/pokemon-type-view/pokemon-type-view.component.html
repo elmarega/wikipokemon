@@ -1,0 +1,16 @@
+<h2>Tipos de pokemons</h2>
+
+<section class="card__container">
+  @for(item of types; track item.url) {
+    <card>
+      <strong title>{{item.name}}</strong>
+
+      <div actions>
+        <button (click)="viewrDetails(item)">Ver mais</button>
+      </div>
+    </card>
+  }
+  @if(isLoading) {
+  <p> Carregando </p>
+  }
+</section>

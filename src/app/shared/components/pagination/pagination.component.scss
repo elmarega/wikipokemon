@@ -1,0 +1,25 @@
+:host {
+  .wrapper__page {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    input {
+      width: 50px;
+    }
+  }
+
+  .btn-selected {
+    background: #4cff73;
+  }
+
+  .btn-selected:after {
+    background: transparent !important;
+  }
+
+  @media (min-width: 768px) {
+    button {
+      padding: 8px 15px 8px;
+    }
+  }
+}
